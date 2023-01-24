@@ -1,0 +1,22 @@
+{
+  "name": "apirestmongoose",
+  "version": "1.0.0",
+  "description": "API Rest MongoDB + Mongoose",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Fran V. Hdez. (Francsy Ludens)",
+  "license": "ISC",
+  "dependencies": {
+    "cowsay": "^1.5.0",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  }
+}

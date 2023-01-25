@@ -1,11 +1,9 @@
-// Controlador - Lógica de negocio de la app
 const Product = require('../models/products')
 const Provider = require('../models/providers')
 
 const getProducts = async (req,res) => {
-    if (req.params.id) { // con ID
+    if (req.params.id) {
       try {
-            // let product = await Product.find({id:req.params.id},'-_id -__v'); OOTRA OPCIón
             let product = await Product.find({id:req.params.id}, {"_id" : 0,"__v":0}).populate('provider', '-_id -__v'); // []
             if (product.length>0) {
                 res.status(200).json(product[0]); // Respuesta de la API para 1 producto
@@ -18,7 +16,7 @@ const getProducts = async (req,res) => {
             res.status(400).json({msj: err.message});
         }
 
-    } else { // sin ID --> TODOS los products
+    } else {
         try {
             let products = await Product.find({}).populate('provider', '-_id -__v').select('-_id -__v'); // []
             res.status(200).json(products); // Respuesta de la API para muchos productos
@@ -36,8 +34,6 @@ const createProduct = async (req,res) => {
     const {id, title, price, description, image, providerName } = req.body; // {} nuevo producto a guardar
     if(id && title && price && description && image && providerName) {
             const provider = await Provider.find({company_name: providerName});
-            console.log('*****************')
-            console.log(provider[0])
             const provider_id = provider[0]._id.toString();
         try{
             const newProduct = new Product({
@@ -48,8 +44,7 @@ const createProduct = async (req,res) => {
                 image,
                 provider:provider_id
             });
-        // let response = await new Product(newProduct);
-        let answer = await newProduct.save(); // objeto de vuelta de guardar en la bbdd
+        let answer = await newProduct.save();
         console.log("Este es el console.log de lo que devuelve la api", answer);
 
         res.status(201).json({
@@ -77,7 +72,6 @@ PRUEBA:
 "image":"https://www.heura.com.png",
 "providerName": "COEXDI"
 }
-
  */
 
 module.exports = {

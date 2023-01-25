@@ -2,8 +2,6 @@ const express = require('express')
 const cowsay = require('cowsay')
 const morgan = require('morgan')
 require('./utils/db_Mongo'); //conectarse a la base de datos FakeShop de Mongo
-
-
 const error404 = require('./middlewares/error404')
 
 // Módulos de Rutas
@@ -19,6 +17,7 @@ app.use(morgan('dev'))
 // Middlewares
 app.use(express.json()); // Habilitar tipo de dato a recibir
 app.use(express.urlencoded({ extended: true }));
+
 
 //Rutas 
 app.use('/api/products',productsApiRoutes); // Rutas web API products

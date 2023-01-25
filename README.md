@@ -11,13 +11,12 @@
 
 ## Endpoints:
 
-<br>
 
 ### `/api/providers/ (POST)`
 
 <br>
 
-Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_web`.
+Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_web` (tanto company_name como el CIF no pueden coincidir con otros proveedores de la BBDD.
 
 - Puedes usar el siguiente ejemplo, `POST` en /api/providers/ con la siguiente información:
 
@@ -35,7 +34,7 @@ Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_w
 
 <br>
 
-Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `image` y `providerName`. 
+Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `image` y `providerName` (tanto el nombre como el id no pueden coincidir con otros productos de la BBDD. 
 
 - Puedes usar el siguiente ejemplo, `POST` en /api/products/ con la siguiente información:
 

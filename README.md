@@ -2,8 +2,16 @@
 
 ### MongoDB + Mongoose - API REST con Express
 
+### INSTRUCCIONES: 
+
+1. Instalar las dependencias del proyecto node: `npm install`
+2. Conecta tu despliegue en Mongodb en `mongodb://localhost:27017`
+3. Ejecuta `npm run dev` en la consola.
+3. Utiliza los siguientes endpoints para probar la app.
 
 ## Endpoints:
+
+<br>
 
 ### `/api/providers/ (POST)`
 
@@ -13,14 +21,15 @@ Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_w
 
 - Puedes usar el siguiente ejemplo, `POST` en /api/providers/ con la siguiente información:
 
-	`{
+```javascript
+	{
 	"company_name":"Veura",
-	"CIF":"0735472L",
+	"CIF":"07354472L",
 	"address":"C/Los Molinos, Barcelona",
 	"url_web":"https://veurafoods.com/es"
-	}`	
-
-
+	}	
+```
+<br>
 
 ### `/api/products/ (POST)`
 
@@ -30,16 +39,18 @@ Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `im
 
 - Puedes usar el siguiente ejemplo, `POST` en /api/products/ con la siguiente información:
 
+```javascript
+{ 
+	"id": 1,
+	"title": "Hamburguesas veganas",
+	"price": 4.50,
+	"description":"PlantBased Game changers Burguers",
+	"image":"https://www.veura.com/hamburguesa.png",
+	"providerName": "Veura"
+}
+```
 
-`{ "id": 1,
-"title": "Hamburguesas veganas",
-"price": 4.50,
-"description": "PlantBased Game changers",
-"image":"https://www.veura.com/hamburguesa.png",
-"providerName": "Veura"
-}`
-
-
+<br>
 
 ### `/api/providers/ (GET)`
 
@@ -47,7 +58,9 @@ Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `im
 
 Devuelve la lista de proveedores.
 
+- Si añades el `name`, te devuelve la empresa con dicho nombre: `api/providers/Veura`
 
+<br>
 
 ### `/api/products/:id (GET)`
 
@@ -55,7 +68,7 @@ Devuelve la lista de proveedores.
 
 Devuelve la lista de productos incluyendo información sobre el proveedor de cada producto.
 
-- Si añades el `id`, te devuelve sólo el producto asociado al mismo.
+- Si añades el `id`, te devuelve sólo el producto asociado al mismo: `/api/products/1`
 
 <br>
 

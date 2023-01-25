@@ -1,11 +1,27 @@
 const Provider = require('../models/providers')
 
 const getProviders = async (req, res) => {
-    try {
-        let providers = await Provider.find({}, '-_id -__v');
-        res.status(200).json(providers);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
+    if (req.params.name){
+        try {
+            let provider = await Provider.find({company_name:req.params.name}, {"_id" : 0,"__v":0});
+            if (provider.length>0) {
+                res.status(200).json(provider[0]);
+            }
+            else {
+                res.status(404).json({msj:"provider no encontrado por nombre: "+req.params.name});
+            }    
+        }
+        catch(err){
+            res.status(400).json({msj: err.message});
+        }
+    } else {
+
+        try {
+            let providers = await Provider.find({}, '-_id -__v');
+            res.status(200).json(providers);
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
     }
 }
 

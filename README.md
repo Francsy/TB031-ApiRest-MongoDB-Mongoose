@@ -84,7 +84,7 @@ Devuelve la lista de proveedores.
 
 <br>
 
-### `/api/products/:id (GET)`
+### `/api/products/ (GET)`
 
 <br>
 
@@ -105,7 +105,7 @@ Modifica un proveedor. Pasando su nombre actual en la ruta. En el req.body tiene
 
 ```javascript
 	{
-	"company_name":"Garden Gourmet",
+	"newName":"Garden Gourmet",
 	"address":"C/Los vientos, 58, Madrid"
 	}	
 ```

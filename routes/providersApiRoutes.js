@@ -1,8 +1,10 @@
 const express = require('express')
 const providersApiRouter = express.Router()
-const providerApiController = require('../controllers/providersApiController')
+const providersApiController = require('../controllers/providersApiController')
 
-providersApiRouter.get('/:name?', providerApiController.getProviders)
-providersApiRouter.post('/', providerApiController.createProvider)
+providersApiRouter.get('/:name?', providersApiController.getProviders)
+providersApiRouter.post('/', providersApiController.createProvider)
+providersApiRouter.put('/:name', providersApiController.updateProvider)
+providersApiRouter.delete('/:name', providersApiController.deleteProvider)
 
 module.exports = providersApiRouter;

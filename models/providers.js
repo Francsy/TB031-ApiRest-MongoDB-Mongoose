@@ -29,7 +29,6 @@ const Provider = mongoose.model('Provider', providerSchema);
 
 module.exports = Provider;
 
-
 // Insertar un provider
 // const p = new Provider({
 //     company_name: "COEXDI",
@@ -39,4 +38,3 @@ module.exports = Provider;
 // });
 
 // p.save().then((data)=>console.log(data));
-

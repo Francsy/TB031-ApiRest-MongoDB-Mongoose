@@ -42,7 +42,6 @@ const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
 
-
 // Insertar un producto
 // const p = new Product({
 //     id: 1,
@@ -54,4 +53,3 @@ module.exports = Product;
 // });
 
 // p.save().then((data)=>console.log(data));
-

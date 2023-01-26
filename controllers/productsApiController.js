@@ -1,5 +1,6 @@
 const Product = require('../models/products')
 const Provider = require('../models/providers')
+const getIdAvailable = require('../utils/getIdsAvailable') // Función para que los ids se asignen automaticamente
 
 const getProducts = async (req, res) => {
     if (req.params.id) {
@@ -18,7 +19,7 @@ const getProducts = async (req, res) => {
 
     } else {
         try {
-            let products = await Product.find({}).populate('provider', '-_id -__v').select('-_id -__v'); // []
+            let products = await Product.find({}).populate('provider', '-_id -__v').select('-_id -__v').sort({id: 1}); // []
             res.status(200).json(products); // Respuesta de la API para muchos productos
         }
         catch (error) {
@@ -31,8 +32,9 @@ const getProducts = async (req, res) => {
 const createProduct = async (req, res) => {
 
     console.log("Esto es el console.log de lo que introducimos por postman", req.body); // Objeto recibido de producto nuevo
-    const { id, title, price, description, image, providerName } = req.body; // {} nuevo producto a guardar
-    if (id && title && price && description && image && providerName) {
+    const { title, price, description, image, providerName } = req.body; // {} nuevo producto a guardar
+    if (title && price && description && image && providerName) {
+        const id = await getIdAvailable();
         const provider = await Provider.find({ company_name: providerName });
         const provider_id = provider[0]._id.toString();
         try {
@@ -62,20 +64,6 @@ const createProduct = async (req, res) => {
         res.status(400).json({ success: false, message: 'Datos introducidos insuficientes' })
     }
 }
-
-
-
-/* 
-PRUEBA:
-
-{ "id": 1,
-"title": "Heura",
-"price": 3.80,
-"description": "PlantBased Game changers",
-"image":"https://www.heura.com.png",
-"providerName": "COEXDI"
-}
- */
 
 const updateProduct = async (req, res) => {
     if (req.params.id) {
@@ -123,7 +111,6 @@ const updateProduct = async (req, res) => {
             succes: false, message: 'Introduce un id'
         })
     }
-
 }
 
 const deleteProduct = async (req, res) => {

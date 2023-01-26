@@ -45,13 +45,12 @@ Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_w
 
 <br>
 
-Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `image` y `providerName` (tanto el nombre como el id no pueden coincidir con otros productos de la BBDD. 
+Crea un nuevo producto. Debes incluir `title`, `price`, `description`, `image` y `providerName` (el nombre no puede coincidir con otros productos de la BBDD. Aparte del id de MongoDB, también se creará automáticamente otro id. Este se asigna a través de una función auxiliar que busca en la BBDD el primer hueco vacío empezando desde el 1 (los nuevos productos ocuparan los huecos que dejen los eliminados y si no hay, el primer producto tendrá el 1).
 
 - Puedes usar el siguiente ejemplo, `POST` en /api/products/ con la siguiente información:
 
 ```javascript
 { 
-	"id": 1,
 	"title": "Chorizo 100% vegetal",
 	"price": 4.50,
 	"description":"Chorizo vegano con alto contenido en proteinas, hierro y vitamina B12, sin gluten",
@@ -63,7 +62,6 @@ Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `im
 
 ```javascript
 { 
-	"id": 2,
 	"title": "Vuna",
 	"price": 4.50,
 	"description":"Atún vegano, alternativa 100% vegetal",
@@ -88,7 +86,7 @@ Devuelve la lista de proveedores.
 
 <br>
 
-Devuelve la lista de productos incluyendo información sobre el proveedor de cada producto.
+Devuelve la lista de productos incluyendo información sobre el proveedor de cada producto. Esta lista se presenta ordenada por los ids de los productos.
 
 - Si añades el `id`, te devuelve sólo el producto asociado al mismo: `/api/products/1`
 
@@ -137,9 +135,10 @@ Modifica un  proveedor. Pasando su id en la ruta. En el req.body tienes que incl
 
 <br>
 
-Elimina el proveedor al pasar su nombre en la ruta.
+Elimina el proveedor (Y TODOS LOS PRODUCTOS ASOCIADOS) al pasar su nombre en la ruta.
 
-- Puedes eliminar el proveedor que ya no tiene productos haciendo `DELETE`en la ruta `/api/providers/Garden Gourmet`
+- Puedes eliminar el proveedor que ya no tiene productos haciendo `DELETE`en la ruta `/api/providers/Garden Gourmet`.
+- Si quieres tambien puedes eliminar el otro junto a todos sus productos haciendo `DELETE` en la ruta `/api/providers/Heura`.
 
 <br>
 
@@ -149,7 +148,8 @@ Elimina el proveedor al pasar su nombre en la ruta.
 
 Elimina el producto al pasar su id en la ruta.
 
-- Puedes eliminar el segundo producto haciendo una petición `DELETE`en la ruta `/api/providers/2`
+- Si no has eliminado el primer proveedor, prueba a eliminar su segundo producto haciendo una petición `DELETE`en la ruta `/api/providers/2`.
+- Si lo has eliminado en el apartado anterior, puedes volver a crear un proveedoor y un producto para probar esta última petición.
 
 <br>
 

@@ -1,4 +1,5 @@
 const Provider = require('../models/providers')
+const Product = require('../models/products')
 
 const getProviders = async (req, res) => {
     if (req.params.name){
@@ -54,7 +55,6 @@ const createProvider = async (req, res) => {
     }
 }
 
-
 const updateProvider = async (req, res) => {
     if (req.params.name) {
         const { name } = req.params;
@@ -103,14 +103,18 @@ const deleteProvider = async (req, res) => {
     if (req.params.name) {
         try {
             const { name } = req.params
-            let provider = await Provider.findOne({ company_name: name })
-            if (!provider) {
+            let providerToDel = await Provider.findOne({ company_name: name })
+            if (!providerToDel) {
                 res.status(404).json({ msj: `El proveedor con el nombre ${name} no existe` })
             } else {
-                await Provider.findOneAndDelete({ company_name: name });
+                let product = await Product.find({ provider: providerToDel._id }) //Se saca un arr con todos los productos asociados al proveedor
+                if(product[0]) {
+                    await Product.deleteMany({provider: providerToDel._id }) //Si al menos un producto asociado existe, se eliminan todos los productos
+                }
+                await Provider.findOneAndDelete({ company_name: name }); //Finalmente se elimina el proveedor
                 res.status(201).json({
                     success: true,
-                    message: 'Proveedor eliminado.'
+                    message: 'Proveedor y productos asociados eliminados con éxito.'
                 })
             }
         } catch (err) {
@@ -122,7 +126,6 @@ const deleteProvider = async (req, res) => {
         res.status(400).json({ succes: false, message: 'Introduce un nombre de proveedor en la url' })
     }
 }
-
 
 module.exports = {
     getProviders,

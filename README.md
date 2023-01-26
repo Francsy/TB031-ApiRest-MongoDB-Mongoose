@@ -137,9 +137,10 @@ Modifica un  proveedor. Pasando su id en la ruta. En el req.body tienes que incl
 
 <br>
 
-Elimina el proveedor al pasar su nombre en la ruta.
+Elimina el proveedor (Y TODOS LOS PRODUCTOS ASOCIADOS) al pasar su nombre en la ruta.
 
-- Puedes eliminar el proveedor que ya no tiene productos haciendo `DELETE`en la ruta `/api/providers/Garden Gourmet`
+- Puedes eliminar el proveedor que ya no tiene productos haciendo `DELETE`en la ruta `/api/providers/Garden Gourmet`.
+- Si quieres tambien puedes eliminar el otro junto a todos sus productos haciendo `DELETE` en la ruta `/api/providers/Heura`.
 
 <br>
 
@@ -149,7 +150,8 @@ Elimina el proveedor al pasar su nombre en la ruta.
 
 Elimina el producto al pasar su id en la ruta.
 
-- Puedes eliminar el segundo producto haciendo una petición `DELETE`en la ruta `/api/providers/2`
+- Si no has eliminado el primer proveedor, prueba a eliminar su segundo producto haciendo una petición `DELETE`en la ruta `/api/providers/2`.
+- Si lo has eliminado en el apartado anterior, puedes volver a crear un proveedoor y un producto para probar esta última petición.
 
 <br>
 

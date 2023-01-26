@@ -22,10 +22,21 @@ Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_w
 
 ```javascript
 	{
-	"company_name":"Veura",
+	"company_name":"Heura",
 	"CIF":"07354472L",
 	"address":"C/Los Molinos, Barcelona",
-	"url_web":"https://veurafoods.com/es"
+	"url_web":"https://heurafoods.com/es"
+	}	
+```
+
+- Puedes crear también otro proveedor:
+
+```javascript
+	{
+	"company_name":"Garden Gourmat",
+	"CIF":"094857693K",
+	"address":"C/Los vientos, Madrid",
+	"url_web":"https://www.gardengourmat.es/"
 	}	
 ```
 <br>
@@ -41,11 +52,23 @@ Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `im
 ```javascript
 { 
 	"id": 1,
-	"title": "Hamburguesas veganas",
+	"title": "Chorizo 100% vegetal",
 	"price": 4.50,
-	"description":"PlantBased Game changers Burguers",
-	"image":"https://www.veura.com/hamburguesa.png",
-	"providerName": "Veura"
+	"description":"Chorizo vegano con alto contenido en proteinas, hierro y vitamina B12, sin gluten",
+	"image":"https://www.datocms-assets.com/38036/1667399132-untitled-design-39.png?fit=crop&fm=webp&w=1045.png",
+	"providerName": "Heura"
+}
+```
+- También puedes crear otro producto asociado al otro proveedor:
+
+```javascript
+{ 
+	"id": 2,
+	"title": "Vuna",
+	"price": 4.50,
+	"description":"Atún vegano, alternativa 100% vegetal",
+	"image":"https://www.gardengourmat.es/sites/default/files/2022-01/Vuna.png",
+	"providerName": "Garden Gourmat"
 }
 ```
 
@@ -57,7 +80,7 @@ Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `im
 
 Devuelve la lista de proveedores.
 
-- Si añades el `name`, te devuelve la empresa con dicho nombre: `api/providers/Veura`
+- Si añades el `name`, te devuelve la empresa con dicho nombre: `api/providers/Heura`
 
 <br>
 
@@ -71,6 +94,64 @@ Devuelve la lista de productos incluyendo información sobre el proveedor de cad
 
 <br>
 
+
+### `/api/providers/:name (PUT)`
+
+<br>
+
+Modifica un proveedor. Pasando su nombre actual en la ruta. En el req.body tienes que incluir al menos una propiedad a modificar (no tienen por que ser todas), de las siguientes: `newName`, `CIF`, `address` y `url_web`.
+
+- Puedes usar el siguiente ejemplo, `PUT` en `/api/providers/Garden Gourmat` con la siguiente información:
+
+```javascript
+	{
+	"company_name":"Garden Gourmet",
+	"address":"C/Los vientos, 58, Madrid"
+	}	
+```
+
+<br>
+
+
+### `/api/products/:id (PUT)`
+
+<br>
+
+Modifica un  proveedor. Pasando su id en la ruta. En el req.body tienes que incluir al menos una propiedad a modificar (no tienen por que ser todas), de las siguientes: `title`, `price`, `description`, `image` y/o "providerName".
+
+- Puedes usar el siguiente ejemplo, vamos a modificar el producto del segundo proveedor totalmente para que sea un nuevo producto del primero `PUT` en /api/products/2 con la siguiente información:
+
+```javascript
+{ 
+	"title": "Escalope empanado vegano",
+	"price": 3.50,
+	"description":"Producto vegetal a base de proteína de soja y trigo con aceite de oliva virgen extra 1,9%.",
+	"image":"https://www.datocms-assets.com/38036/1667387623-untitled-design-16.png?fit=crop&fm=webp&w=1045",
+	"providerName": "Heura"
+}
+```
+
+<br>
+
+### `/api/providers/:name (DELETE)`
+
+<br>
+
+Elimina el proveedor al pasar su nombre en la ruta.
+
+- Puedes eliminar el proveedor que ya no tiene productos haciendo `DELETE`en la ruta `/api/providers/Garden Gourmet`
+
+<br>
+
+### `/api/products/:id (DELETE)`
+
+<br>
+
+Elimina el producto al pasar su id en la ruta.
+
+- Puedes eliminar el segundo producto haciendo una petición `DELETE`en la ruta `/api/providers/2`
+
+<br>
 
 ## Ejercicio original:
 

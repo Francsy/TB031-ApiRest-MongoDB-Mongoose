@@ -54,7 +54,79 @@ const createProvider = async (req, res) => {
     }
 }
 
+
+const updateProvider = async (req, res) => {
+    if (req.params.name) {
+        const { name } = req.params;
+        const { newName, CIF, address, url_web } = req.body;
+        let provider = await Provider.findOne({ company_name: name })
+        if (!provider) {
+            res.status(404).json({ msj: `El proveedor con el nombre ${name} no existe` })
+        }
+        else {
+            if (newName || CIF || address || url_web) {
+                try {
+                    const updateInfo = {
+                        company_name: newName || provider.company_name,
+                        CIF: CIF || provider.CIF,
+                        address: address || provider.address,
+                        url_web: url_web || provider.url_web
+                    }
+                    let providerUpdated = await Provider.findOneAndUpdate({ company_name: name }, updateInfo);
+                    let answer = await providerUpdated.save();
+                    console.log("Este es el console.log de lo que devuelve la api", answer);
+                    res.status(201).json({
+                        success: true,
+                        message: 'Proveedor modificado.',
+                        product: updateInfo
+                    })
+                } catch (err) {
+                    console.log('Este es el error que devuelve la api', err);
+                    res.status(400).json({
+                        success: false, message: err.message
+                    })
+                }
+            } else {
+                res.status(400).json({
+                    succes: false, message: 'Introduce un newName, CIF, address o url_web'
+                })
+            }
+        }
+    } else {
+        res.status(400).json({
+            succes: false, message: 'Introduce un id'
+        })
+    }
+}
+
+const deleteProvider = async (req, res) => {
+    if (req.params.name) {
+        try {
+            const { name } = req.params
+            let provider = await Provider.findOne({ company_name: name })
+            if (!provider) {
+                res.status(404).json({ msj: `El proveedor con el nombre ${name} no existe` })
+            } else {
+                await Provider.findOneAndDelete({ company_name: name });
+                res.status(201).json({
+                    success: true,
+                    message: 'Proveedor eliminado.'
+                })
+            }
+        } catch (err) {
+            res.status(400).json({
+                success: false, message: err.message
+            })
+        }
+    } else {
+        res.status(400).json({ succes: false, message: 'Introduce un nombre de proveedor en la url' })
+    }
+}
+
+
 module.exports = {
     getProviders,
-    createProvider
+    createProvider,
+    updateProvider,
+    deleteProvider
 }

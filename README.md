@@ -45,7 +45,7 @@ Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_w
 
 <br>
 
-Crea un nuevo producto. Debes incluir `title`, `price`, `description`, `image` y `providerName` (tanto el nombre como el id no pueden coincidir con otros productos de la BBDD. Aparte del _id de MongoDB, también se creará automáticamente un id. Este se crea a través de una función que busca en la BBDD el primer hueco secuencialmente desde el 1 (si no hay ningún producto, el primero se asignará a este número y si hay huecos por productos eliminadas, los nuevos ocuparan esos huecos)
+Crea un nuevo producto. Debes incluir `title`, `price`, `description`, `image` y `providerName` (el nombre no puede coincidir con otros productos de la BBDD. Aparte del id de MongoDB, también se creará automáticamente otro id. Este se asigna a través de una función auxiliar que busca en la BBDD el primer hueco vacío empezando desde el 1 (los nuevos productos ocuparan los huecos que dejen los eliminados y si no hay, el primer producto tendrá el 1).
 
 - Puedes usar el siguiente ejemplo, `POST` en /api/products/ con la siguiente información:
 

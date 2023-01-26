@@ -45,13 +45,12 @@ Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_w
 
 <br>
 
-Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `image` y `providerName` (tanto el nombre como el id no pueden coincidir con otros productos de la BBDD. 
+Crea un nuevo producto. Debes incluir `title`, `price`, `description`, `image` y `providerName` (tanto el nombre como el id no pueden coincidir con otros productos de la BBDD. Aparte del _id de MongoDB, también se creará automáticamente un id. Este se crea a través de una función que busca en la BBDD el primer hueco secuencialmente desde el 1 (si no hay ningún producto, el primero se asignará a este número y si hay huecos por productos eliminadas, los nuevos ocuparan esos huecos)
 
 - Puedes usar el siguiente ejemplo, `POST` en /api/products/ con la siguiente información:
 
 ```javascript
 { 
-	"id": 1,
 	"title": "Chorizo 100% vegetal",
 	"price": 4.50,
 	"description":"Chorizo vegano con alto contenido en proteinas, hierro y vitamina B12, sin gluten",
@@ -63,7 +62,6 @@ Crea un nuevo producto. Debes incluir `id`, `title`, `price`, `description`, `im
 
 ```javascript
 { 
-	"id": 2,
 	"title": "Vuna",
 	"price": 4.50,
 	"description":"Atún vegano, alternativa 100% vegetal",
@@ -88,7 +86,7 @@ Devuelve la lista de proveedores.
 
 <br>
 
-Devuelve la lista de productos incluyendo información sobre el proveedor de cada producto.
+Devuelve la lista de productos incluyendo información sobre el proveedor de cada producto. Esta lista se presenta ordenada por los ids de los productos.
 
 - Si añades el `id`, te devuelve sólo el producto asociado al mismo: `/api/products/1`
 

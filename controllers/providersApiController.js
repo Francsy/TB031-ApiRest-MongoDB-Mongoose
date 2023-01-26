@@ -55,7 +55,6 @@ const createProvider = async (req, res) => {
     }
 }
 
-
 const updateProvider = async (req, res) => {
     if (req.params.name) {
         const { name } = req.params;
@@ -100,7 +99,6 @@ const updateProvider = async (req, res) => {
     }
 }
 
-
 const deleteProvider = async (req, res) => {
     if (req.params.name) {
         try {
@@ -128,7 +126,6 @@ const deleteProvider = async (req, res) => {
         res.status(400).json({ succes: false, message: 'Introduce un nombre de proveedor en la url' })
     }
 }
-
 
 module.exports = {
     getProviders,

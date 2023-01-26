@@ -21,23 +21,23 @@ Crea un nuevo proveedor. Debes incluir `company_name`, `CIF`, `address` y `url_w
 - Puedes usar el siguiente ejemplo, `POST` en /api/providers/ con la siguiente información:
 
 ```javascript
-	{
+{
 	"company_name":"Heura",
 	"CIF":"07354472L",
 	"address":"C/Los Molinos, Barcelona",
 	"url_web":"https://heurafoods.com/es"
-	}	
+}	
 ```
 
 - Puedes crear también otro proveedor:
 
 ```javascript
-	{
+{
 	"company_name":"Garden Gourmat",
 	"CIF":"094857693K",
 	"address":"C/Los vientos, Madrid",
 	"url_web":"https://www.gardengourmat.es/"
-	}	
+}	
 ```
 <br>
 
@@ -102,10 +102,10 @@ Modifica un proveedor. Pasando su nombre actual en la ruta. En el req.body tiene
 - Puedes usar el siguiente ejemplo, `PUT` en `/api/providers/Garden Gourmat` con la siguiente información:
 
 ```javascript
-	{
+{
 	"newName":"Garden Gourmet",
 	"address":"C/Los vientos, 58, Madrid"
-	}	
+}	
 ```
 
 <br>
